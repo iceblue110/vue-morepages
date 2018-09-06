@@ -78,7 +78,7 @@ var chunks = Object.keys(pages);
 console.log("webpack.dev.conf.js=================")
 // console.log(pages);
 for (var pathname in pages) {
-  // console.log(pathname)
+  console.log(pathname)
   // 配置生成的html文件，定义路径等
   var conf = {
     // filename: filename+'index.html',

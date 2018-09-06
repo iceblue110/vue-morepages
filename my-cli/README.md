@@ -14,6 +14,9 @@ npm run dev
 # build for production with minification
 npm run build
 
+#单独项目构建 例 myproject1
+npm run build myproject1
+
 # build for production and view the bundle analyzer report
 npm run build --report
 ```

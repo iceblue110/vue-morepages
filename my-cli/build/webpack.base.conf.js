@@ -8,13 +8,16 @@ var fs = require('fs')
 var project 
 
 
-var TARGET = JSON.parse(process.env.npm_config_argv).remain;
+var TARGET = JSON.parse(process.env.npm_config_argv).remain.toString();
 if(TARGET){
-  console.log(TARGET.toString())
-  project=TARGET.toString()
+  console.log(TARGET)
+  project=TARGET
+}
+else{
+  project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project;
 }
 // console.log(process.env)
-console.log(TARGET)
+console.log(TARGET,TARGET.toString(),project)
 
 
 function resolve (dir) {
