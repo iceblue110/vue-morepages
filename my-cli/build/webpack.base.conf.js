@@ -24,7 +24,7 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var entries = utils.getMultiEntry('./src/pages/**/main.js');
+var entries = utils.getMultiEntry('./src/pages/**/index.js');
 console.log(entries);
 // entries.forEach(item => {
 //   console.log(item)
@@ -42,19 +42,19 @@ console.log(entries);
 //   chunksPro.push(tem[1])
 // });
 // console.log(chunksPro)
-
-
+var chunks = Object.keys(entries);
+console.log(chunks)
 module.exports = {
   context: path.resolve(__dirname, '../'),
   // entry: {
   //   app: './src/main.js'
   // },
-  entry: path.join(__dirname, '../src/pages/'+project+'/main.js'),
-  // entry:entries,
+  // entry: path.join(__dirname, '../src/pages/'+project+'/main.js'),
+  entry:entries,
   output: {
-    // path: config.build.assetsRoot,
+    path: config.build.assetsRoot,
     
-    path: path.join(__dirname, 'dist/'+project+'/'),
+    // path: path.join(__dirname, 'dist/'+entries+'/'),
     filename: '[name].[hash].js',
     publicPath: process.env.NODE_ENV === 'production'
       ? config.build.assetsPublicPath

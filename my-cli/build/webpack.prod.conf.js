@@ -13,7 +13,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const env = require('../config/prod.env')
 
-
+var dev=require('../config/dev.env')
 
 const webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -64,7 +64,10 @@ const webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       // filename: config.build.index,
-      template: './index.html',
+      // filename : dev.env.NODE_ENV === 'development'
+      //   ? 'index.html'
+      //   : config.build.index,
+      template: 'index.html',
       inject: true,
       minify: {
         removeComments: true,

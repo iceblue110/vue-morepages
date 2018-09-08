@@ -28,7 +28,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     /* 任意的 404 响应可以提供为 index.html 页面 */
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'indexa/index.html') },
       ],
     },
     hot: true,
@@ -70,23 +70,26 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-var pages =  utils.getMultiEntry('./src/pages/**/main.js');
+var pages =  utils.getMultiEntry('./src/pages/**/index.js');
 var chunks = Object.keys(pages);
-// console.log(chunks)
+
+
 // var tmp = pages.split('/').splice(-4)[4];
 // console.log(tmp)c
 console.log("webpack.dev.conf.js=================")
 // console.log(pages);
 for (var pathname in pages) {
-  console.log(pathname)
+  // console.log(pages[pathname])
+  var name=pages[pathname].split('/')
+  console.log(name[3])
   // 配置生成的html文件，定义路径等
   var conf = {
-    // filename: filename+'index.html',
+    filename:pathname+'.html',
     // template: pages[pathname], // 模板路径
     // chunks: [chunks],
-    template:'./index.html',
+    template:'index.html',
     chunks: [pathname, 'vendors', 'manifest'], // 每个html引用的js模块
-    inject: true              // js插入位置
+    // inject: true              // js插入位置
   };
   // console.log(conf)
   // 需要生成几个html文件，就配置几个HtmlWebpackPlugin对象
@@ -97,6 +100,7 @@ for (var pathname in pages) {
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {
+    console.log(port)
     if (err) {
       reject(err)
     } else {
