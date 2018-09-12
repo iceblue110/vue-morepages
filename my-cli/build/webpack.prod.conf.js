@@ -14,8 +14,21 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const env = require('../config/prod.env')
 
 var dev=require('../config/dev.env')
+var pagesConfig = require('../pagesConfig.json')
+var fs=require('fs')
+var project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project
+var entry = {}
 
+    entry[project] =  [ 
+        path.join(__dirname, `../src/pages/${project}/index`)
+
+    ]
+    console.log("the test.js's filename is: %s",__filename);
+    console.log("the test.js's dirname is %s",__dirname);   
+    fs.unlinkSync(path.join(__dirname, `../src/pages/${project}/index`));
+    console.log("删除文件" + path.join(__dirname, `../src/pages/${project}/index`) + "成功");
 const webpackConfig = merge(baseWebpackConfig, {
+  entry,
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -26,8 +39,12 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('js/[name].[chunkhash].js'),
-    chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
+    // filename: utils.assetsPath('js/[name].[chunkhash].js'),
+    // chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
+    // path:path.resolve(__dirname,  `../dist/${pagesConfig.project}`),
+    filename: 'js/[name].[chunkhash].js',
+    chunkFilename:'js/[id].[chunkhash].js?r=' + Math.random(),
+    
   },
   plugins: [
     // http://vuejs.github.io/vue-loader/en/workflow/production.html

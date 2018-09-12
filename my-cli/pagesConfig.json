@@ -1,10 +1,8 @@
 
 {
-
-    "project" : "detail",
-    "projects":["indexa","detail"]
-  
-  }
+    "project" : "advert",
+    "projects":["indexa","detail","advert"]
+}
   
   
   

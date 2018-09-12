@@ -10,14 +10,14 @@ var project
 
 var TARGET = JSON.parse(process.env.npm_config_argv).remain.toString();
 if(TARGET){
-  console.log(TARGET)
+  // console.log(TARGET)
   project=TARGET
 }
 else{
   project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project;
 }
 // console.log(process.env)
-console.log(TARGET,TARGET.toString(),project)
+// console.log(TARGET,TARGET.toString(),project)
 
 
 function resolve (dir) {
@@ -43,7 +43,7 @@ console.log(entries);
 // });
 // console.log(chunksPro)
 var chunks = Object.keys(entries);
-console.log(chunks)
+// console.log(chunks)
 module.exports = {
   context: path.resolve(__dirname, '../'),
   // entry: {
@@ -73,6 +73,13 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
+      },
+     
+      {
+        test: /\.less$/,
+        use: [
+                'vue-style-loader'
+             ]
       },
       {
         test: /\.js$/,

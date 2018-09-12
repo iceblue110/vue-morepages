@@ -10,15 +10,23 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "element-ui": "^2.4.6",
+    "froala-editor": "git+https://code.qschou.com/liuz/qsc-editor.git#v1.0",
     "glob": "^7.1.3",
+    "viewerjs": "^1.2.0",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-froala-wysiwyg": "^2.8.4",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1",
+    "watermark": "^1.0.1",
+    "whatwg-fetch": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "babel-loader": "^7.1.1",
+    "babel-plugin-component": "^1.1.1",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-plugin-transform-vue-jsx": "^3.5.0",
@@ -31,6 +39,8 @@
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
     "html-webpack-plugin": "^2.30.1",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
     "ora": "^1.2.0",
@@ -41,6 +51,7 @@
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
+    "style-loader": "^0.23.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
