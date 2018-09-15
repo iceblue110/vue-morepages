@@ -1,7 +1,7 @@
 
 {
-    "project" : "advert",
-    "projects":["indexa","detail","advert"]
+    "project" : "advertTest",
+    "projects":["indexa","detail","advertTest"]
 }
   
   

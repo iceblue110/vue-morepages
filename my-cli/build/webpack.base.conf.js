@@ -3,19 +3,10 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
+const webpack = require('webpack')
 var fs = require('fs')
 // = JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project;
-var project 
 
-
-var TARGET = JSON.parse(process.env.npm_config_argv).remain.toString();
-if(TARGET){
-  // console.log(TARGET)
-  project=TARGET
-}
-else{
-  project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project;
-}
 // console.log(process.env)
 // console.log(TARGET,TARGET.toString(),project)
 
@@ -24,8 +15,18 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-var entries = utils.getMultiEntry('./src/pages/**/index.js');
-console.log(entries);
+// var entries = utils.getMultiEntry('./src/pages/**/index.js');
+// console.log(entries);
+
+// var fs=require('fs')
+// var project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project
+// var entry = {}
+
+//     entry[project] =  [ 
+//         path.join(__dirname, `../src/pages/${project}/index`)
+
+//     ]
+
 // entries.forEach(item => {
 //   console.log(item)
 //   // var tem=item.split('/')
@@ -42,7 +43,7 @@ console.log(entries);
 //   chunksPro.push(tem[1])
 // });
 // console.log(chunksPro)
-var chunks = Object.keys(entries);
+// var chunks = Object.keys(entries);
 // console.log(chunks)
 module.exports = {
   context: path.resolve(__dirname, '../'),
@@ -50,7 +51,8 @@ module.exports = {
   //   app: './src/main.js'
   // },
   // entry: path.join(__dirname, '../src/pages/'+project+'/main.js'),
-  entry:entries,
+  // entry:entries,
+  // entry,
   output: {
     path: config.build.assetsRoot,
     
@@ -112,6 +114,12 @@ module.exports = {
       }
     ]
   },
+  plugins:[
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery"
+    })
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).

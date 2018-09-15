@@ -17,8 +17,10 @@ var pagesConfig = require('../pagesConfig.json')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+var entry = utils.getMultiEntry('./src/pages/**/index.js');
 
 const devWebpackConfig = merge(baseWebpackConfig, {
+  entry,
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
@@ -51,16 +53,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
          
         //   return  path.posix.join(config.dev.assetsPublicPath, 'indexa/index.html')
         // }},
-        // { from:  /^\/detail\/.*$/, to:function(context){
-        //   console.log(context)
-         
-        //   return  path.posix.join(config.dev.assetsPublicPath, 'detail/index.html')
-        // }},
-        // { from:  /^\/detail\/.*$/, to:function(context){
-        //   console.log(context)
-         
-        //   return  path.posix.join(config.dev.assetsPublicPath, 'detail/index.html')
-        // }},
+     
       ],
     },
     hot: true,
@@ -99,12 +92,6 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     //   inject: true
     // }),
     // copy custom static assets
-   
-      new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
-      }),
-   
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, '../static'),

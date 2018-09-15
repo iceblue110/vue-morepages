@@ -15,18 +15,32 @@ const env = require('../config/prod.env')
 
 var dev=require('../config/dev.env')
 var pagesConfig = require('../pagesConfig.json')
-var fs=require('fs')
-var project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project
-var entry = {}
 
+var project;
+var fs=require('fs')
+
+
+var TARGET = JSON.parse(process.env.npm_config_argv).remain.toString();
+if(TARGET){
+  // console.log(TARGET)
+  project=TARGET
+}
+else{
+  project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project;
+}
+
+
+
+// var project=JSON.parse(fs.readFileSync('./pagesConfig.json', 'utf8')).project
+var entry = {}
     entry[project] =  [ 
         path.join(__dirname, `../src/pages/${project}/index`)
 
     ]
     console.log("the test.js's filename is: %s",__filename);
     console.log("the test.js's dirname is %s",__dirname);   
-    fs.unlinkSync(path.join(__dirname, `../src/pages/${project}/index`));
-    console.log("删除文件" + path.join(__dirname, `../src/pages/${project}/index`) + "成功");
+    // fs.unlinkSync(path.join(__dirname, `../dist/${project}`));
+    console.log("删除文件" + path.join(__dirname, `../dist/${project}`) + "成功");
 const webpackConfig = merge(baseWebpackConfig, {
   entry,
   module: {
@@ -39,11 +53,11 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
-    // filename: utils.assetsPath('js/[name].[chunkhash].js'),
+    // filename: utils.assetsPath('css/[name].[contenthash].css'),
+    filename: utils.assetsPath('js/[name].[chunkhash].js'),
     // chunkFilename: utils.assetsPath('js/[id].[chunkhash].js'),
     // path:path.resolve(__dirname,  `../dist/${pagesConfig.project}`),
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename:'js/[id].[chunkhash].js?r=' + Math.random(),
+    chunkFilename:utils.assetsPath('js/[id].[chunkhash].js?r=' + Math.random()),
     
   },
   plugins: [
@@ -104,6 +118,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks (module) {
+        // console.log(module)
         // any required modules inside node_modules are extracted to vendor
         return (
           module.resource &&
